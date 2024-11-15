@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\URL;
 
+use Illuminate\Support\Facades\File;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -39,5 +41,11 @@ class AppServiceProvider extends ServiceProvider
         if($this->app->environment('production')) {
             URL::forceScheme('https');
         };
+        $source = database_path('database.sqlite');
+        $destination = '/tmp/database.sqlite';
+
+        if (!file_exists($destination)) {
+            File::copy($source, $destination);
+        }
     }
 }
