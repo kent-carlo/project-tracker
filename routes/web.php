@@ -20,12 +20,17 @@ Route::get('/clear-cache', function () {
     Artisan::call('config:clear');
     $configOutput = Artisan::output();
 
+    // Clear config cache
+    Artisan::call('vendor:publish --force --tag=livewire:assets');
+    $configOutputvendor = Artisan::output();
+
     return response()->json([
         'message' => 'Caches cleared successfully',
         'outputs' => [
             'route' => $routeOutput,
             'view' => $viewOutput,
             'config' => $configOutput,
+            'configOutputvendor' => $configOutputvendor,
         ]
     ]);
 });
