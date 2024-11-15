@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
-    return 'cool';
+    return redirect('/admin');
 });
 
 Route::get('/clear-cache', function () {
